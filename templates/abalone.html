@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Abalone Prediction</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        input, select, label {
+            display: block;
+            margin-bottom: 15px;
+        }
+        input, select {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .prediction {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="/abalone/0">
+        <label for="sex">Sex (M for Male, F for Female, I for Infant):</label>
+        <select name="sex" id="sex" required>
+            <option value="">Select Sex</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="I">Infant</option>
+        </select>
+
+        <label for="length">Length (mm):</label>
+        <input type="number" step="any" name="length" id="length" required placeholder="Enter length in mm">
+
+        <label for="diameter">Diameter (mm):</label>
+        <input type="number" step="any" name="diameter" id="diameter" required placeholder="Enter diameter in mm">
+
+        <label for="height">Height (mm):</label>
+        <input type="number" step="any" name="height" id="height" required placeholder="Enter height in mm">
+
+        <label for="whole_weight">Whole Weight (g):</label>
+        <input type="number" step="any" name="whole_weight" id="whole_weight" required placeholder="Enter weight in g">
+
+        <label for="shucked_weight">Shucked Weight (g):</label>
+        <input type="number" step="any" name="shucked_weight" id="shucked_weight" required placeholder="Enter weight in g">
+
+        <label for="viscera_weight">Viscera Weight (g):</label>
+        <input type="number" step="any" name="viscera_weight" id="viscera_weight" required placeholder="Enter weight in g">
+
+        <label for="shell_weight">Shell Weight (g):</label>
+        <input type="number" step="any" name="shell_weight" id="shell_weight" required placeholder="Enter weight in g">
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if pred %}
+    <div class="prediction">
+        <h3>Prediction Result: {{ pred }}</h3>
+    </div>
+    {% endif %}
+</body>
+</html>
